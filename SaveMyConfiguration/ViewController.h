@@ -10,4 +10,15 @@
 
 @interface ViewController : UIViewController
 
+@property (nonatomic, weak) IBOutlet UIImageView *showImage;
+@property (weak, nonatomic) IBOutlet UILabel *showName;
+@property (weak, nonatomic) IBOutlet UILabel *showDescription;
+
+
+- (IBAction)createObject:(UIButton *)sender;
+- (IBAction)saveObject:(id)sender;
+- (IBAction)showSavedObject:(id)sender;
+
+
+
 @end

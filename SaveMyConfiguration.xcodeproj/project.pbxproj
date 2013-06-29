@@ -23,6 +23,9 @@
 		E766806A177F2DAD009B2A19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7668045177F2DAD009B2A19 /* Foundation.framework */; };
 		E7668072177F2DAD009B2A19 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7668070177F2DAD009B2A19 /* InfoPlist.strings */; };
 		E7668075177F2DAD009B2A19 /* SaveMyConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7668074177F2DAD009B2A19 /* SaveMyConfigurationTests.m */; };
+		E7668080177F2E0C009B2A19 /* CreateObjectWithImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E766807F177F2E0C009B2A19 /* CreateObjectWithImage.m */; };
+		E7668084177F308F009B2A19 /* belka.png in Resources */ = {isa = PBXBuildFile; fileRef = E7668083177F308F009B2A19 /* belka.png */; };
+		E7668086177F448E009B2A19 /* straus.png in Resources */ = {isa = PBXBuildFile; fileRef = E7668085177F448E009B2A19 /* straus.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,10 @@
 		E7668071177F2DAD009B2A19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E7668073177F2DAD009B2A19 /* SaveMyConfigurationTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveMyConfigurationTests.h; sourceTree = "<group>"; };
 		E7668074177F2DAD009B2A19 /* SaveMyConfigurationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveMyConfigurationTests.m; sourceTree = "<group>"; };
+		E766807E177F2E0C009B2A19 /* CreateObjectWithImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateObjectWithImage.h; sourceTree = "<group>"; };
+		E766807F177F2E0C009B2A19 /* CreateObjectWithImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateObjectWithImage.m; sourceTree = "<group>"; };
+		E7668083177F308F009B2A19 /* belka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = belka.png; sourceTree = "<group>"; };
+		E7668085177F448E009B2A19 /* straus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = straus.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +129,8 @@
 				E766805B177F2DAD009B2A19 /* MainStoryboard.storyboard */,
 				E766805E177F2DAD009B2A19 /* ViewController.h */,
 				E766805F177F2DAD009B2A19 /* ViewController.m */,
+				E766807E177F2E0C009B2A19 /* CreateObjectWithImage.h */,
+				E766807F177F2E0C009B2A19 /* CreateObjectWithImage.m */,
 				E766804A177F2DAD009B2A19 /* Supporting Files */,
 			);
 			path = SaveMyConfiguration;
@@ -130,6 +139,8 @@
 		E766804A177F2DAD009B2A19 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E7668085177F448E009B2A19 /* straus.png */,
+				E7668083177F308F009B2A19 /* belka.png */,
 				E766804B177F2DAD009B2A19 /* SaveMyConfiguration-Info.plist */,
 				E766804C177F2DAD009B2A19 /* InfoPlist.strings */,
 				E766804F177F2DAD009B2A19 /* main.m */,
@@ -236,6 +247,8 @@
 				E7668058177F2DAD009B2A19 /* Default@2x.png in Resources */,
 				E766805A177F2DAD009B2A19 /* Default-568h@2x.png in Resources */,
 				E766805D177F2DAD009B2A19 /* MainStoryboard.storyboard in Resources */,
+				E7668084177F308F009B2A19 /* belka.png in Resources */,
+				E7668086177F448E009B2A19 /* straus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +286,7 @@
 				E7668050177F2DAD009B2A19 /* main.m in Sources */,
 				E7668054177F2DAD009B2A19 /* AppDelegate.m in Sources */,
 				E7668060177F2DAD009B2A19 /* ViewController.m in Sources */,
+				E7668080177F2E0C009B2A19 /* CreateObjectWithImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
