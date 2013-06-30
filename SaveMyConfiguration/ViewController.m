@@ -92,4 +92,35 @@ NSString *const ImagesKey = @"images";
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:CellIdentifier] ;
+        cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
+    MyImage *savedImage = [[NSKeyedUnarchiver unarchiveObjectWithData: [[NSUserDefaults standardUserDefaults] objectForKey:ImagesKey]] objectAtIndex:indexPath.row];
+    cell.textLabel.text = savedImage.name;
+    cell.detailTextLabel.text = savedImage.detail;
+    cell.imageView.image = savedImage.image;
+    
+    
+    
+    return cell;
+}
+
 @end
