@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "MyImage.h"
+#import "MyCell.h"
 
 /*
     Такие ключи лучше выносить в константы, поскольку использовать их можно будет из разных точек программы, 
@@ -48,7 +49,7 @@ NSString *const ImagesKey = @"images";
     NSData *dataOfKey = [defaults objectForKey:ImagesKey];
     
     // проверили есть ли какое-то значение для нашего ключа(может мы уже однажды выполняли это действие)
-    if (!dataOfKey) {
+    if (1) {
         // Ни разу не выполняли
         
         NSBundle *mainBundle = [NSBundle mainBundle]; 
@@ -66,7 +67,8 @@ NSString *const ImagesKey = @"images";
             UIImage *imageForPath = [[UIImage alloc] initWithContentsOfFile:filePath];
             
             MyImage *imageObject = [[MyImage alloc] initWithName:fileName
-                                                          detail:filePath
+                                                          detail:[filePath lastPathComponent]
+                                                      someSwitch:YES 
                                                         andImage:imageForPath];
             [_arrayOfImages addObject:imageObject];
         }
@@ -99,24 +101,22 @@ NSString *const ImagesKey = @"images";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return _arrayOfImages.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"cell2";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:CellIdentifier] ;
-        cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    }
-    
+    MyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
     MyImage *savedImage = [[NSKeyedUnarchiver unarchiveObjectWithData: [[NSUserDefaults standardUserDefaults] objectForKey:ImagesKey]] objectAtIndex:indexPath.row];
-    cell.textLabel.text = savedImage.name;
-    cell.detailTextLabel.text = savedImage.detail;
-    cell.imageView.image = savedImage.image;
+    
+    cell.title.text = savedImage.name;
+    cell.subtitle.text = savedImage.detail;
+    cell.imageBox.image = savedImage.image;
+    cell.turnSwitch.on = savedImage.someSwitch;
+    
     
     
     

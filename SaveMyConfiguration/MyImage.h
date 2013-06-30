@@ -13,8 +13,9 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *detail;
 @property (nonatomic, strong) UIImage *image;
+@property (nonatomic) BOOL someSwitch;
 
-- (MyImage *)initWithName:(NSString *)name detail:(NSString *)detail andImage:(UIImage *)image;
+- (MyImage *)initWithName:(NSString *)name detail:(NSString *)detail someSwitch: (BOOL) sw andImage:(UIImage *)image;
 
 
 @end

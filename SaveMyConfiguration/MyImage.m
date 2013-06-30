@@ -11,7 +11,7 @@
 @implementation MyImage
 
 
-- (MyImage *)initWithName:(NSString *)name detail:(NSString *)detail andImage:(UIImage *)image
+- (MyImage *)initWithName:(NSString *)name detail:(NSString *)detail someSwitch: (BOOL) sw andImage:(UIImage *)image
 {
     self = [super init];
     if (self)
@@ -19,6 +19,7 @@
         _name = name;
         _detail = detail;
         _image = image;
+        _someSwitch = sw;
     }
     return self;
 }
@@ -33,6 +34,7 @@
 {
     [encoder encodeObject:_name forKey:@"name"];
     [encoder encodeObject:_detail forKey:@"detail"];
+    [encoder encodeBool:_someSwitch forKey:@"switch"];
     NSData *imageData = UIImagePNGRepresentation(_image);
     [encoder encodeObject:imageData forKey:@"image"];
 
@@ -45,6 +47,7 @@
     {
         _name = [decoder decodeObjectForKey:@"name"];
         _detail = [decoder decodeObjectForKey:@"detail"];
+        _someSwitch = [decoder decodeBoolForKey:@"switch"];
         _image = [[UIImage alloc] initWithData:[decoder decodeObjectForKey:@"image"]];
                 
     }

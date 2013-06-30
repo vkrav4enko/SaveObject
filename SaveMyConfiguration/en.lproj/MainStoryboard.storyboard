@@ -18,6 +18,61 @@
                                     <constraint firstAttribute="height" constant="532" id="cYh-TN-ije"/>
                                     <constraint firstAttribute="width" constant="271" id="qWi-o6-d9N"/>
                                 </constraints>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell2" id="lyp-KX-gXu" customClass="MyCell">
+                                        <rect key="frame" x="0.0" y="22" width="271" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="238" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0cO-9F-Mhu">
+                                                    <rect key="contentStretch" x="0.0" y="0.0" width="0.19999999999999968" height="0.19999999999999968"/>
+                                                </switch>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vY-cQ-kyJ">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="wGk-PE-hdt"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ane-Yz-y1i">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="BnG-RX-Zmu"/>
+                                                        <constraint firstAttribute="width" constant="98" id="ZbD-BL-f9e"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLK-Z7-b6t">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="71" id="aJI-NM-t5E"/>
+                                                        <constraint firstAttribute="height" constant="42" id="cIh-c3-iSN"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="0cO-9F-Mhu" secondAttribute="trailing" constant="8" id="Ced-65-wEG"/>
+                                            <constraint firstItem="Ane-Yz-y1i" firstAttribute="top" secondItem="lyp-KX-gXu" secondAttribute="top" constant="20" type="default" id="Kmw-1t-asy"/>
+                                            <constraint firstItem="0cO-9F-Mhu" firstAttribute="top" secondItem="lyp-KX-gXu" secondAttribute="top" constant="8" id="TzP-bY-KdK"/>
+                                            <constraint firstItem="6vY-cQ-kyJ" firstAttribute="leading" secondItem="lyp-KX-gXu" secondAttribute="leading" constant="13" id="Y3N-MV-qLw"/>
+                                            <constraint firstItem="6vY-cQ-kyJ" firstAttribute="leading" secondItem="Ane-Yz-y1i" secondAttribute="leading" type="default" id="hQY-e0-KdK"/>
+                                            <constraint firstItem="6vY-cQ-kyJ" firstAttribute="top" secondItem="lyp-KX-gXu" secondAttribute="top" constant="2" id="nTH-fs-CXr"/>
+                                            <constraint firstItem="YLK-Z7-b6t" firstAttribute="leading" secondItem="6vY-cQ-kyJ" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="s2z-h2-ic5"/>
+                                            <constraint firstItem="YLK-Z7-b6t" firstAttribute="centerY" secondItem="lyp-KX-gXu" secondAttribute="centerY" type="default" id="tS4-ls-dSl"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageBox" destination="YLK-Z7-b6t" id="QM8-Rl-j9r"/>
+                                            <outlet property="subtitle" destination="Ane-Yz-y1i" id="BLc-2p-BUw"/>
+                                            <outlet property="title" destination="6vY-cQ-kyJ" id="rhL-dG-n0D"/>
+                                            <outlet property="turnSwitch" destination="0cO-9F-Mhu" id="iY6-Vo-qbu"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="2" id="4O0-DG-Vmm"/>
                                     <outlet property="delegate" destination="2" id="alc-m2-wFB"/>
@@ -26,8 +81,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RnF-83-F3u" firstAttribute="top" secondItem="3" secondAttribute="top" constant="6" id="235-Jm-Kq1"/>
                             <constraint firstItem="RnF-83-F3u" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="YUN-PG-kzc"/>
+                            <constraint firstItem="RnF-83-F3u" firstAttribute="centerY" secondItem="3" secondAttribute="centerY" type="default" id="lW3-Ly-a3t"/>
                         </constraints>
                     </view>
                     <connections>
@@ -40,6 +95,15 @@
         </scene>
     </scenes>
     <classes>
+        <class className="MyCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageBox" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="subtitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="title" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="turnSwitch" candidateClass="UISwitch"/>
+            </relationships>
+        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
