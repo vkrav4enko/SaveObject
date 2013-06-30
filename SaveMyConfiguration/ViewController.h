@@ -14,6 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *showName;
 @property (weak, nonatomic) IBOutlet UILabel *showDescription;
 @property (nonatomic, retain) IBOutlet UITableView *addTable;
-
-
+- (NSArray *)curentImages:(NSInteger)index;
+- (NSMutableArray *) makeArrayOfImagesFromFiles: (NSArray *) array;
 @end

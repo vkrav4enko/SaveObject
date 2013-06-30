@@ -21,7 +21,7 @@ NSString *const ImagesKey = @"images";
 /*
     Сразу отталкивайся от того, что изображений несколько(это значит что N), значит что есть какой-то список
 */
-@property (nonatomic, strong) NSMutableArray *arrayOfImages;
+@property (nonatomic, strong) NSMutableDictionary *dictionaryOfImages;
 
 @end
 
@@ -48,42 +48,32 @@ NSString *const ImagesKey = @"images";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *dataOfKey = [defaults objectForKey:ImagesKey];
     
-    // проверили есть ли какое-то значение для нашего ключа(может мы уже однажды выполняли это действие)
-    if (1) {
-        // Ни разу не выполняли
-        
+    
+    if (YES) {
+               
         NSBundle *mainBundle = [NSBundle mainBundle]; 
 
-        // Получаем имена файлов в папке
-        NSArray *fileList = [mainBundle pathsForResourcesOfType:@".png" inDirectory:@"Images"];
+        NSArray *pngFileList = [mainBundle pathsForResourcesOfType:@".png" inDirectory:@"Images"];
+                
+        NSMutableArray* arrayOfPNG = [self makeArrayOfImagesFromFiles:pngFileList];
         
-        _arrayOfImages = [[NSMutableArray alloc] initWithCapacity:fileList.count];
+                
+        NSArray *jpegFileList = [mainBundle pathsForResourcesOfType:@".jpg" inDirectory:@"Images"];
         
-        for (NSString *filePath in fileList) {
-            // Берем последний компонент в адресе (это значит последний после символа "/") и удаляем расширение ".png"
-            NSString *fileName = [[filePath lastPathComponent] stringByDeletingPathExtension];
-            
-            // Получаем картинку
-            UIImage *imageForPath = [[UIImage alloc] initWithContentsOfFile:filePath];
-            
-            MyImage *imageObject = [[MyImage alloc] initWithName:fileName
-                                                          detail:[filePath lastPathComponent]
-                                                      someSwitch:YES 
-                                                        andImage:imageForPath];
-            [_arrayOfImages addObject:imageObject];
-        }
+        NSMutableArray* arrayOfJPEG = [self makeArrayOfImagesFromFiles:jpegFileList];
         
-        // Теперь у нас есть массив из наших объектов
-        // И можно сохранить этот результат
+                
+        _dictionaryOfImages = [NSMutableDictionary dictionaryWithObjectsAndKeys:arrayOfPNG, @"png", arrayOfJPEG, @"jpg", nil];
         
-        NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_arrayOfImages];
+        
+        NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_dictionaryOfImages];
         
         [defaults setObject:arrayData forKey:ImagesKey];
         [defaults synchronize];
     } else {
         // Если уже есть массив картинок
-        NSArray *oldArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataOfKey];
-        _arrayOfImages = [[NSMutableArray alloc] initWithArray:oldArray];
+        NSMutableDictionary *oldDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:dataOfKey];
+        _dictionaryOfImages = [[NSMutableDictionary alloc] initWithDictionary:oldDictionary];
     }
 
 }
@@ -96,12 +86,17 @@ NSString *const ImagesKey = @"images";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return _dictionaryOfImages.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _arrayOfImages.count;
+    NSArray *curentImages = [self curentImages:section];
+    return [curentImages count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [[_dictionaryOfImages allKeys] objectAtIndex:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -109,18 +104,48 @@ NSString *const ImagesKey = @"images";
     static NSString *CellIdentifier = @"cell2";
     
     MyCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-    MyImage *savedImage = [[NSKeyedUnarchiver unarchiveObjectWithData: [[NSUserDefaults standardUserDefaults] objectForKey:ImagesKey]] objectAtIndex:indexPath.row];
     
-    cell.title.text = savedImage.name;
-    cell.subtitle.text = savedImage.detail;
-    cell.imageBox.image = savedImage.image;
-    cell.turnSwitch.on = savedImage.someSwitch;
+    NSArray *curentImages = [self curentImages:indexPath.section];
+    MyImage *currentImage = [curentImages objectAtIndex:indexPath.row];
+    
+    
+  
+    cell.title.text = currentImage.name;
+    cell.subtitle.text = currentImage.detail;
+    cell.imageBox.image = currentImage.image;
+    cell.turnSwitch.on = currentImage.someSwitch;
     
     
     
     
     return cell;
+}
+
+- (NSArray *)curentImages:(NSInteger)index {
+    NSArray *keys = [_dictionaryOfImages allKeys];
+    NSString *curentKey = [keys objectAtIndex:index];
+    NSArray *curentImages = [_dictionaryOfImages objectForKey:curentKey];
+    return curentImages;
+}
+
+- (NSMutableArray *) makeArrayOfImagesFromFiles: (NSArray *) array
+{
+    NSMutableArray* arrayOfImages = [[NSMutableArray alloc] initWithCapacity:array.count];
+    
+    for (NSString *filePath in array) {
+        
+        NSString *fileName = [[filePath lastPathComponent] stringByDeletingPathExtension];
+        
+        UIImage *imageForPath = [[UIImage alloc] initWithContentsOfFile:filePath];
+        
+        MyImage *imageObject = [[MyImage alloc] initWithName:fileName
+                                                      detail:[filePath lastPathComponent]
+                                                  someSwitch:YES
+                                                    andImage:imageForPath];
+        [arrayOfImages addObject:imageObject];
+    }
+    return arrayOfImages;
+
 }
 
 @end
