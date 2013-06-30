@@ -6,9 +6,28 @@
 //  Copyright (c) 2013 Владимир. All rights reserved.
 //
 
-#import "CreateObjectWithImage.h"
+#import "ImageWithOptions.h"
 
-@implementation CreateObjectWithImage
+@implementation ImageWithOptions
+
+
+- (ImageWithOptions *)initWithName:(NSString *)name andDescription:(NSString *)description andImage:(UIImage *)image
+{
+    self = [super init];
+    if (self)
+    {
+        _nameOfObject = name;
+        _descriptionOfObject = description;
+        _image = image;
+    }
+    return self;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"Name :%@ /n Description: %@ /n ImageSize: %f x %f", _nameOfObject, _descriptionOfObject, _image.size.width, _image.size.height];
+    
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
@@ -33,5 +52,7 @@
     }
     return self;
 }
+
+
 
 @end
