@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "ImageWithOptions.h"
-#define object(n) _object##n
+
 
 @interface ViewController ()
 @property (nonatomic, strong) ImageWithOptions *object1;
@@ -21,7 +21,7 @@
 @property (nonatomic, strong) ImageWithOptions *object8;
 @property (nonatomic, strong) ImageWithOptions *object9;
 @property (nonatomic, strong) ImageWithOptions *object10;
-@property (nonatomic, strong) NSDictionary *objects;
+@property (nonatomic, strong) NSDictionary *dictionaryWithObjects;
 
 @property (nonatomic) NSUserDefaults *userDefaults;
 @end
@@ -33,9 +33,23 @@
     [super viewDidLoad];
 	    
     _userDefaults = [NSUserDefaults standardUserDefaults];
-   
-       
-    
+    _object1 = [ImageWithOptions alloc];
+    _object2 = [ImageWithOptions alloc];
+    _object3 = [ImageWithOptions alloc];
+    _object4 = [ImageWithOptions alloc];
+    _object5 = [ImageWithOptions alloc];
+    _object6 = [ImageWithOptions alloc];
+    _object7 = [ImageWithOptions alloc];
+    _object8 = [ImageWithOptions alloc];
+    _object9 = [ImageWithOptions alloc];
+    _object10 = [ImageWithOptions alloc];
+           
+    _dictionaryWithObjects = [NSDictionary dictionaryWithObjectsAndKeys:_object1, @"belka", _object2, @"straus", _object3, @"kot", _object4, @"osel", _object5, @"panda", _object6, @"pes", _object7, @"shimpanze", _object8, @"slon", _object9, @"sova", _object10, @"tulen", nil];
+    NSArray *keys = [_dictionaryWithObjects allKeys];
+    for(NSString *key in keys)
+    {
+        [[_dictionaryWithObjects objectForKey:key]  initWithName:key andDescription:[@"eto " stringByAppendingString:key] andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[key stringByAppendingString:@".png"] ofType:nil]]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,49 +58,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)createObject:(id)sender
-{
-   
-    
-    object(1) = [[ImageWithOptions alloc] initWithName:@"belka" andDescription:@"eto belka" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"belka.png" ofType:nil]]];
-    object(2)= [[ImageWithOptions alloc] initWithName:@"straus" andDescription:@"eto straus" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"straus.png" ofType:nil]]];
-    object(3)= [[ImageWithOptions alloc] initWithName:@"kot" andDescription:@"eto kot" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"kot.png" ofType:nil]]];
-    object(4)= [[ImageWithOptions alloc] initWithName:@"osel" andDescription:@"eto osel" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"osel.png" ofType:nil]]];
-    object(5)= [[ImageWithOptions alloc] initWithName:@"panda" andDescription:@"eto panda" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"panda.png" ofType:nil]]];
-    object(6)= [[ImageWithOptions alloc] initWithName:@"pes" andDescription:@"eto pes" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"pes.png" ofType:nil]]];
-    object(7)= [[ImageWithOptions alloc] initWithName:@"shimpanze" andDescription:@"eto shimpanze" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"shimpanze.png" ofType:nil]]];
-    object(8)= [[ImageWithOptions alloc] initWithName:@"slon" andDescription:@"eto slon" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"slon.png" ofType:nil]]];
-    object(9)= [[ImageWithOptions alloc] initWithName:@"sova" andDescription:@"eto sova" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"sova.png" ofType:nil]]];
-    object(10)= [[ImageWithOptions alloc] initWithName:@"tulen" andDescription:@"eto tulen" andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"tulen.png" ofType:nil]]];
 
-    
-}
 
 - (void)saveObject:(id)sender
 {
+    int i = 0;
     
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:_object1];
-    NSLog(@"%@", data);
-    [_userDefaults setObject: data forKey:@"object1"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:_object2];
-    [_userDefaults setObject: data forKey:@"object2"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:_object3];
-    [_userDefaults setObject: data forKey:@"object3"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:_object4];
-    [_userDefaults setObject: data forKey:@"object4"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:_object5];
-    [_userDefaults setObject: data forKey:@"object5"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:_object6];
-    [_userDefaults setObject: data forKey:@"object6"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:_object7];
-    [_userDefaults setObject: data forKey:@"object7"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:_object8];
-    [_userDefaults setObject: data forKey:@"object8"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:_object9];
-    [_userDefaults setObject: data forKey:@"object9"];
-    data = [NSKeyedArchiver archivedDataWithRootObject:_object10];
-    [_userDefaults setObject: data forKey:@"object10"];
-    
+    NSArray *keys = [_dictionaryWithObjects allKeys];
+    for (NSString *key in keys)
+    {
+        i++;
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_dictionaryWithObjects objectForKey:key]];
+        [_userDefaults setObject:data forKey:[NSString stringWithFormat:@"object%i",i]];
+    }
     
     [_userDefaults synchronize];
     

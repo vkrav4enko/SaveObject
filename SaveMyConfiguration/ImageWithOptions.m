@@ -25,7 +25,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"Name :%@ /n Description: %@ /n ImageSize: %f x %f", _nameOfObject, _descriptionOfObject, _image.size.width, _image.size.height];
+    return [NSString stringWithFormat:@"Name :%@.  Description: %@.  ImageSize: %f x %f", _nameOfObject, _descriptionOfObject, _image.size.width, _image.size.height];
     
 }
 

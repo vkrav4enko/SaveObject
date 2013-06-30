@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *showDescription;
 
 
-- (IBAction)createObject:(UIButton *)sender;
+
 - (IBAction)saveObject:(id)sender;
 - (IBAction)showSavedObject:(id)sender;
 
