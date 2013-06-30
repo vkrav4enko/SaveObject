@@ -15,10 +15,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *showDescription;
 
 
-
-- (IBAction)saveObject:(id)sender;
-- (IBAction)showSavedObject:(id)sender;
-
-
-
 @end

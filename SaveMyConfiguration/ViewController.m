@@ -7,23 +7,21 @@
 //
 
 #import "ViewController.h"
-#import "ImageWithOptions.h"
+#import "MyImage.h"
 
+/*
+    Такие ключи лучше выносить в константы, поскольку использовать их можно будет из разных точек программы, 
+    а опечатка в этом случае не сразу будет заметна
+*/
+NSString *const ImagesKey = @"images"; 
 
 @interface ViewController ()
-@property (nonatomic, strong) ImageWithOptions *object1;
-@property (nonatomic, strong) ImageWithOptions *object2;
-@property (nonatomic, strong) ImageWithOptions *object3;
-@property (nonatomic, strong) ImageWithOptions *object4;
-@property (nonatomic, strong) ImageWithOptions *object5;
-@property (nonatomic, strong) ImageWithOptions *object6;
-@property (nonatomic, strong) ImageWithOptions *object7;
-@property (nonatomic, strong) ImageWithOptions *object8;
-@property (nonatomic, strong) ImageWithOptions *object9;
-@property (nonatomic, strong) ImageWithOptions *object10;
-@property (nonatomic, strong) NSDictionary *dictionaryWithObjects;
 
-@property (nonatomic) NSUserDefaults *userDefaults;
+/*
+    Сразу отталкивайся от того, что изображений несколько(это значит что N), значит что есть какой-то список
+*/
+@property (nonatomic, strong) NSMutableArray *arrayOfImages;
+
 @end
 
 @implementation ViewController
@@ -31,25 +29,61 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	    
-    _userDefaults = [NSUserDefaults standardUserDefaults];
-    _object1 = [ImageWithOptions alloc];
-    _object2 = [ImageWithOptions alloc];
-    _object3 = [ImageWithOptions alloc];
-    _object4 = [ImageWithOptions alloc];
-    _object5 = [ImageWithOptions alloc];
-    _object6 = [ImageWithOptions alloc];
-    _object7 = [ImageWithOptions alloc];
-    _object8 = [ImageWithOptions alloc];
-    _object9 = [ImageWithOptions alloc];
-    _object10 = [ImageWithOptions alloc];
-           
-    _dictionaryWithObjects = [NSDictionary dictionaryWithObjectsAndKeys:_object1, @"belka", _object2, @"straus", _object3, @"kot", _object4, @"osel", _object5, @"panda", _object6, @"pes", _object7, @"shimpanze", _object8, @"slon", _object9, @"sova", _object10, @"tulen", nil];
-    NSArray *keys = [_dictionaryWithObjects allKeys];
-    for(NSString *key in keys)
-    {
-        [[_dictionaryWithObjects objectForKey:key]  initWithName:key andDescription:[@"eto " stringByAppendingString:key] andImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[key stringByAppendingString:@".png"] ofType:nil]]];
+    
+    /* 
+        NSUserDefaults необязательно выводить ее в переменную, совсем не обязательно
+        Всегда можно работать с ней так:
+     
+        NSString *name = [[NSUserDefaults standardUserDefaults] valueForKey:@"name"];
+        
+        или
+     
+        [[NSUserDefaults standardUserDefaults] setFloat:0.25 forKey:@"floatKey"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    */
+    
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *dataOfKey = [defaults objectForKey:ImagesKey];
+    
+    // проверили есть ли какое-то значение для нашего ключа(может мы уже однажды выполняли это действие)
+    if (!dataOfKey) {
+        // Ни разу не выполняли
+        
+        NSBundle *mainBundle = [NSBundle mainBundle]; 
+
+        // Получаем имена файлов в папке
+        NSArray *fileList = [mainBundle pathsForResourcesOfType:@".png" inDirectory:@"Images"];
+        
+        _arrayOfImages = [[NSMutableArray alloc] initWithCapacity:fileList.count];
+        
+        for (NSString *filePath in fileList) {
+            // Берем последний компонент в адресе (это значит последний после символа "/") и удаляем расширение ".png"
+            NSString *fileName = [[filePath lastPathComponent] stringByDeletingPathExtension];
+            
+            // Получаем картинку
+            UIImage *imageForPath = [[UIImage alloc] initWithContentsOfFile:filePath];
+            
+            MyImage *imageObject = [[MyImage alloc] initWithName:fileName
+                                                          detail:filePath
+                                                        andImage:imageForPath];
+            [_arrayOfImages addObject:imageObject];
+        }
+        
+        // Теперь у нас есть массив из наших объектов
+        // И можно сохранить этот результат
+        
+        NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_arrayOfImages];
+        
+        [defaults setObject:arrayData forKey:ImagesKey];
+        [defaults synchronize];
+    } else {
+        // Если уже есть массив картинок
+        NSArray *oldArray = [NSKeyedUnarchiver unarchiveObjectWithData:dataOfKey];
+        _arrayOfImages = [[NSMutableArray alloc] initWithArray:oldArray];
     }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,43 +91,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-- (void)saveObject:(id)sender
-{
-    int i = 0;
-    
-    NSArray *keys = [_dictionaryWithObjects allKeys];
-    for (NSString *key in keys)
-    {
-        i++;
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[_dictionaryWithObjects objectForKey:key]];
-        [_userDefaults setObject:data forKey:[NSString stringWithFormat:@"object%i",i]];
-    }
-    
-    [_userDefaults synchronize];
-    
-}
-
-- (void)showSavedObject:(id)sender
-{
-    ImageWithOptions *savedObject = [NSKeyedUnarchiver unarchiveObjectWithData:[_userDefaults objectForKey:@"object5"]];
-    _showName.text = [@"Name: " stringByAppendingString:savedObject.nameOfObject];
-    _showDescription.text = [@"Description: " stringByAppendingString: savedObject.descriptionOfObject];
-    _showImage.image = savedObject.image;
-    
-    for (int i = 1; i<11; i++)
-    {
-        NSLog (@"%@", [NSKeyedUnarchiver unarchiveObjectWithData:[_userDefaults objectForKey:[@"object" stringByAppendingString: [NSString stringWithFormat:@"%i", i]] ]]);
-    
-    }
-    
-    
-}
-
-
-
-
 
 @end

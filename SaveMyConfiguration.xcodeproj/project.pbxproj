@@ -7,14 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E74B52B3177FFC7D00F13922 /* kot.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B52AB177FFC7D00F13922 /* kot.png */; };
-		E74B52B4177FFC7D00F13922 /* osel.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B52AC177FFC7D00F13922 /* osel.png */; };
-		E74B52B5177FFC7D00F13922 /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B52AD177FFC7D00F13922 /* panda.png */; };
-		E74B52B6177FFC7D00F13922 /* pes.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B52AE177FFC7D00F13922 /* pes.png */; };
-		E74B52B7177FFC7D00F13922 /* shimpanze.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B52AF177FFC7D00F13922 /* shimpanze.png */; };
-		E74B52B8177FFC7D00F13922 /* slon.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B52B0177FFC7D00F13922 /* slon.png */; };
-		E74B52B9177FFC7D00F13922 /* sova.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B52B1177FFC7D00F13922 /* sova.png */; };
-		E74B52BA177FFC7D00F13922 /* tulen.png in Resources */ = {isa = PBXBuildFile; fileRef = E74B52B2177FFC7D00F13922 /* tulen.png */; };
+		848AB7A517803D7A00F09A52 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 848AB7A417803D7A00F09A52 /* Images */; };
 		E7668044177F2DAD009B2A19 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7668043177F2DAD009B2A19 /* UIKit.framework */; };
 		E7668046177F2DAD009B2A19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7668045177F2DAD009B2A19 /* Foundation.framework */; };
 		E7668048177F2DAD009B2A19 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7668047177F2DAD009B2A19 /* CoreGraphics.framework */; };
@@ -31,9 +24,7 @@
 		E766806A177F2DAD009B2A19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7668045177F2DAD009B2A19 /* Foundation.framework */; };
 		E7668072177F2DAD009B2A19 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7668070177F2DAD009B2A19 /* InfoPlist.strings */; };
 		E7668075177F2DAD009B2A19 /* SaveMyConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7668074177F2DAD009B2A19 /* SaveMyConfigurationTests.m */; };
-		E7668080177F2E0C009B2A19 /* ImageWithOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = E766807F177F2E0C009B2A19 /* ImageWithOptions.m */; };
-		E7668084177F308F009B2A19 /* belka.png in Resources */ = {isa = PBXBuildFile; fileRef = E7668083177F308F009B2A19 /* belka.png */; };
-		E7668086177F448E009B2A19 /* straus.png in Resources */ = {isa = PBXBuildFile; fileRef = E7668085177F448E009B2A19 /* straus.png */; };
+		E7668080177F2E0C009B2A19 /* MyImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E766807F177F2E0C009B2A19 /* MyImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,14 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E74B52AB177FFC7D00F13922 /* kot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kot.png; sourceTree = "<group>"; };
-		E74B52AC177FFC7D00F13922 /* osel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = osel.png; sourceTree = "<group>"; };
-		E74B52AD177FFC7D00F13922 /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
-		E74B52AE177FFC7D00F13922 /* pes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pes.png; sourceTree = "<group>"; };
-		E74B52AF177FFC7D00F13922 /* shimpanze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shimpanze.png; sourceTree = "<group>"; };
-		E74B52B0177FFC7D00F13922 /* slon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slon.png; sourceTree = "<group>"; };
-		E74B52B1177FFC7D00F13922 /* sova.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sova.png; sourceTree = "<group>"; };
-		E74B52B2177FFC7D00F13922 /* tulen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tulen.png; sourceTree = "<group>"; };
+		848AB7A417803D7A00F09A52 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		E7668040177F2DAD009B2A19 /* SaveMyConfiguration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaveMyConfiguration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7668043177F2DAD009B2A19 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E7668045177F2DAD009B2A19 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -77,10 +61,8 @@
 		E7668071177F2DAD009B2A19 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E7668073177F2DAD009B2A19 /* SaveMyConfigurationTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SaveMyConfigurationTests.h; sourceTree = "<group>"; };
 		E7668074177F2DAD009B2A19 /* SaveMyConfigurationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SaveMyConfigurationTests.m; sourceTree = "<group>"; };
-		E766807E177F2E0C009B2A19 /* ImageWithOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageWithOptions.h; sourceTree = "<group>"; };
-		E766807F177F2E0C009B2A19 /* ImageWithOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageWithOptions.m; sourceTree = "<group>"; };
-		E7668083177F308F009B2A19 /* belka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = belka.png; sourceTree = "<group>"; };
-		E7668085177F448E009B2A19 /* straus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = straus.png; sourceTree = "<group>"; };
+		E766807E177F2E0C009B2A19 /* MyImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyImage.h; sourceTree = "<group>"; };
+		E766807F177F2E0C009B2A19 /* MyImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyImage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +127,8 @@
 				E766805B177F2DAD009B2A19 /* MainStoryboard.storyboard */,
 				E766805E177F2DAD009B2A19 /* ViewController.h */,
 				E766805F177F2DAD009B2A19 /* ViewController.m */,
-				E766807E177F2E0C009B2A19 /* ImageWithOptions.h */,
-				E766807F177F2E0C009B2A19 /* ImageWithOptions.m */,
+				E766807E177F2E0C009B2A19 /* MyImage.h */,
+				E766807F177F2E0C009B2A19 /* MyImage.m */,
 				E766804A177F2DAD009B2A19 /* Supporting Files */,
 			);
 			path = SaveMyConfiguration;
@@ -155,16 +137,7 @@
 		E766804A177F2DAD009B2A19 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E74B52AB177FFC7D00F13922 /* kot.png */,
-				E74B52AC177FFC7D00F13922 /* osel.png */,
-				E74B52AD177FFC7D00F13922 /* panda.png */,
-				E74B52AE177FFC7D00F13922 /* pes.png */,
-				E74B52AF177FFC7D00F13922 /* shimpanze.png */,
-				E74B52B0177FFC7D00F13922 /* slon.png */,
-				E74B52B1177FFC7D00F13922 /* sova.png */,
-				E74B52B2177FFC7D00F13922 /* tulen.png */,
-				E7668085177F448E009B2A19 /* straus.png */,
-				E7668083177F308F009B2A19 /* belka.png */,
+				848AB7A417803D7A00F09A52 /* Images */,
 				E766804B177F2DAD009B2A19 /* SaveMyConfiguration-Info.plist */,
 				E766804C177F2DAD009B2A19 /* InfoPlist.strings */,
 				E766804F177F2DAD009B2A19 /* main.m */,
@@ -271,16 +244,7 @@
 				E7668058177F2DAD009B2A19 /* Default@2x.png in Resources */,
 				E766805A177F2DAD009B2A19 /* Default-568h@2x.png in Resources */,
 				E766805D177F2DAD009B2A19 /* MainStoryboard.storyboard in Resources */,
-				E7668084177F308F009B2A19 /* belka.png in Resources */,
-				E7668086177F448E009B2A19 /* straus.png in Resources */,
-				E74B52B3177FFC7D00F13922 /* kot.png in Resources */,
-				E74B52B4177FFC7D00F13922 /* osel.png in Resources */,
-				E74B52B5177FFC7D00F13922 /* panda.png in Resources */,
-				E74B52B6177FFC7D00F13922 /* pes.png in Resources */,
-				E74B52B7177FFC7D00F13922 /* shimpanze.png in Resources */,
-				E74B52B8177FFC7D00F13922 /* slon.png in Resources */,
-				E74B52B9177FFC7D00F13922 /* sova.png in Resources */,
-				E74B52BA177FFC7D00F13922 /* tulen.png in Resources */,
+				848AB7A517803D7A00F09A52 /* Images in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +282,7 @@
 				E7668050177F2DAD009B2A19 /* main.m in Sources */,
 				E7668054177F2DAD009B2A19 /* AppDelegate.m in Sources */,
 				E7668060177F2DAD009B2A19 /* ViewController.m in Sources */,
-				E7668080177F2E0C009B2A19 /* ImageWithOptions.m in Sources */,
+				E7668080177F2E0C009B2A19 /* MyImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
