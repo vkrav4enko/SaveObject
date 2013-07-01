@@ -49,7 +49,7 @@ NSString *const ImagesKey = @"images";
     NSData *dataOfKey = [defaults objectForKey:ImagesKey];
     
     
-    if (YES) {
+    if (!dataOfKey) {
                
         NSBundle *mainBundle = [NSBundle mainBundle]; 
 
@@ -115,17 +115,37 @@ NSString *const ImagesKey = @"images";
     cell.imageBox.image = currentImage.image;
     cell.turnSwitch.on = currentImage.someSwitch;
     
-    
+    [cell.turnSwitch addTarget:self action:@selector(turnSwitchChanged:) forControlEvents:UIControlEventValueChanged];
     
     
     return cell;
 }
 
+- (void)turnSwitchChanged:(UISwitch *)cellSwitch {
+
+    NSIndexPath *indexPath = [_addTable indexPathForCell:(UITableViewCell *)cellSwitch.superview.superview];
+    NSString *key = [[_dictionaryOfImages allKeys] objectAtIndex:indexPath.section];
+    NSArray *imagesInSection = _dictionaryOfImages[key];
+    MyImage *imageObject = [imagesInSection objectAtIndex:indexPath.row];
+    imageObject.someSwitch = cellSwitch.on;
+  
+    [[_dictionaryOfImages objectForKey:[[_dictionaryOfImages allKeys] objectAtIndex:indexPath.section]] setObject:imageObject atIndex:indexPath.row];
+    NSData *arrayData = [NSKeyedArchiver archivedDataWithRootObject:_dictionaryOfImages];
+    
+     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:arrayData forKey:ImagesKey];
+    [defaults synchronize];
+
+}
+
 - (NSArray *)curentImages:(NSInteger)index {
-    NSArray *keys = [_dictionaryOfImages allKeys];
+    NSArray *keys = [[NSKeyedUnarchiver unarchiveObjectWithData: [[NSUserDefaults standardUserDefaults] objectForKey:ImagesKey]] allKeys];
     NSString *curentKey = [keys objectAtIndex:index];
-    NSArray *curentImages = [_dictionaryOfImages objectForKey:curentKey];
+    NSArray *curentImages = [[NSKeyedUnarchiver unarchiveObjectWithData: [[NSUserDefaults standardUserDefaults] objectForKey:ImagesKey]] objectForKey:curentKey];
     return curentImages;
+    
+    
+    
 }
 
 - (NSMutableArray *) makeArrayOfImagesFromFiles: (NSArray *) array
