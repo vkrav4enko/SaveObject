@@ -22,6 +22,8 @@ NSString *const ImagesKey = @"images";
     Сразу отталкивайся от того, что изображений несколько(это значит что N), значит что есть какой-то список
 */
 @property (nonatomic, strong) NSMutableDictionary *dictionaryOfImages;
+@property (nonatomic, strong) NSMutableArray *sectionIsOpen;
+
 
 @end
 
@@ -75,6 +77,12 @@ NSString *const ImagesKey = @"images";
         NSMutableDictionary *oldDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:dataOfKey];
         _dictionaryOfImages = [[NSMutableDictionary alloc] initWithDictionary:oldDictionary];
     }
+    
+    _sectionIsOpen = [NSMutableArray array];
+    for (int i = 0; i<= _dictionaryOfImages.count; i++)
+    {
+       [_sectionIsOpen setObject:[NSNumber numberWithBool:NO] atIndexedSubscript:i];
+    }
 
 }
 
@@ -91,11 +99,20 @@ NSString *const ImagesKey = @"images";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *curentImages = [self curentImages:section];
-    return [curentImages count];
+   
+    if([[_sectionIsOpen objectAtIndex:section] boolValue])
+    {
+        NSArray *curentImages = [self curentImages:section];
+        return [curentImages count];
+    }
+    else
+        return 0;
+            
+    
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
     return [[_dictionaryOfImages allKeys] objectAtIndex:section];
 }
 
@@ -119,6 +136,53 @@ NSString *const ImagesKey = @"images";
     
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 50.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionTitle = [[_dictionaryOfImages allKeys] objectAtIndex:section];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0.0f, 0.0f, 320.0f, 50.0f);
+    button.tag = section;
+    button.backgroundColor = [UIColor grayColor];
+    [[button layer] setBorderWidth:2.0f];
+    [[button layer] setBorderColor: [UIColor blackColor].CGColor];
+    [button setTitle:sectionTitle forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(selectSection:)
+     forControlEvents:UIControlEventTouchUpInside];
+    
+    return button;
+}
+
+- (void) selectSection: (UIButton *) sender
+{
+    //Получение текущей секции
+    NSArray *currentSection = [self curentImages: sender.tag];
+    
+    
+    
+    //Создание массива индексов
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    for (int i=0; i<currentSection.count; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:sender.tag]];
+    }
+    
+    //Получение состояния секции
+    BOOL isOpen = [[_sectionIsOpen objectAtIndex:sender.tag] boolValue];
+    [_sectionIsOpen setObject:[NSNumber numberWithBool:!isOpen] atIndexedSubscript:sender.tag];
+    
+    
+    //Анимированное добавление или удаление ячеек секции
+    if (isOpen) {
+        [self.addTable deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    } else {
+        [self.addTable insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationTop];
+    }
+
 }
 
 - (void)turnSwitchChanged:(UISwitch *)cellSwitch {
